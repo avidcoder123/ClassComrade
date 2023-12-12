@@ -1,5 +1,4 @@
 ---
-//TODO: Make this page just show units
 import Layout from "../../../../../layouts/Layout.astro"
 import { appwriteDatabases } from "../../../../../lib/backend";
 import { Query } from "appwrite";
@@ -20,12 +19,12 @@ let Units = await appwriteDatabases.listDocuments(
 ).then(response => response.documents)
 ---
 
-<Layout title="Home" login={true}>
+<Layout title="DraftOnn" login={true}>
     <div class="flex flex-col pt-5 min-h-screen w-[100%]">
         <div class="row">
             <div class="col-12">
-                <div class="flex flex-row justify-center items-center">
-                    <img src="/DraftOnn.png">
+                <div class="flex flex-row justify-center items-center gap-2">
+                    <img class="w-24" src="/DraftOnn.png">
                     <h1 class="text-4xl font-semibold text-center">DraftOnn</h1>
                 </div>
                 <h2 class="text-2xl font-semibold text-center">{Class.Name}</h2>
