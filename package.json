@@ -30,6 +30,7 @@
     "editorjs-header-with-alignment": "^1.0.1",
     "editorjs-html": "^3.4.3",
     "editorjs-paragraph-with-alignment": "^3.0.0",
+    "flowbite": "^2.2.0",
     "js-draw": "^0.25.1",
     "lodash": "^4.17.21",
     "svelte": "^3.59.1",
