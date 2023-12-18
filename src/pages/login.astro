@@ -11,5 +11,7 @@ import Layout from "../layouts/Layout.astro";
   }
 </script>
 <Layout title="Login">
-  <LoginComponent client:only />
+  <div class="h-screen">
+    <LoginComponent client:only />
+  </div>
 </Layout>
