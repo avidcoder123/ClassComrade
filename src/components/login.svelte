@@ -37,7 +37,7 @@
   }
   
 </script>
-<div class="flex flex-col gap-10 items-center">
+<div class="flex flex-col gap-5 items-center">
   <h1 class="text-white text-4xl text-center font-semibold">
     Log In
   </h1>
@@ -57,24 +57,5 @@
     <input bind:value={password} type="password" class={(errorMessage.length ? "border-red-500" : "dark:border-gray-600") + " dark:placeholder-gray-400 dark:text-white dark:bg-gray-700 border text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[28rem] p-3 dark:focus:ring-blue-500 dark:focus:border-blue-500"} placeholder="Password">
   </div>
   <button on:click={login} disabled={disabled} class="text-white disabled:opacity-50 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-10 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Log In</button>
+  <p class="text-center text-gray-300">Don't have an account? <a href="/signup" class="text-blue-500">Sign Up</a></p>
 </div>
-<!-- <div class="flex flex-col gap-5 items-center w-[60vw] mx-auto">
-  <h1 class="text-center text-2xl font-bold pt-16">Welcome Back!</h1>
-  <div class="flex justify-center">
-    <div class="w-96 h-auto p-12 mt-12 rounded-md self-center flex flex-col gap-5">
-    <input type="email" bind:value={email} placeholder="Email" />
-    <input type="password" bind:value={password} placeholder="Password" />
-    <button on:click={login} class="bg-gray-600 disabled:hover:bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded h-10 disabled:opacity-50" disabled={disabled}>Login</button>
-    <p class="text-center text-red-500">{errorMessage}</p>
-    <a href="/signup" class="text-center text-gray-500 hover:text-gray-700">Don't have an account? Sign Up</a>
-    </div>
-  </div>
-</div>
-  <style>
-    input {
-    border: 1px solid #ababab;
-      padding: 0.5rem;
-      border-radius: 5px;
-      background-color: #7676762b;
-    }
-  </style> -->
