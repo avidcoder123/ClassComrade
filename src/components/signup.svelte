@@ -13,6 +13,8 @@
   let errorMessage = '';
   let school = '';
 
+  let addSchool = '';
+
   $: disabled = !email || !password || !userName || !confirmPassword;
 
   $: emailDomain = email.split("@")[1]
@@ -39,7 +41,13 @@
 
   function checkForNew() {
     let domain = emailDomain.toLowerCase().trim()
-    if(school !== "newschool") return;
+    if(school == "newschool") {
+        const modal = document.getElementById('newschoolmodal');
+        if (modal instanceof HTMLDialogElement && typeof modal.showModal === 'function') {
+            modal.showModal();
+        }
+    }
+    return;
     school = ""
     //Ask for new school name
     const newSchoolName = prompt("Enter the name of the new school:")
@@ -134,9 +142,32 @@
       <option value="newschool">Add new school</option>
     </select>
   </div>
-  <button on:click={SignUp} disabled={disabled} class="text-white disabled:opacity-50 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-10 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Log In</button>
+  <button on:click={SignUp} disabled={disabled} class="text-white disabled:opacity-50 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-10 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Sign Up</button>
   <p class="text-center text-gray-300">Already have an account? <a href="/login" class="text-blue-500">Sign Up</a></p>
 </div>
+<dialog id="newschoolmodal" class="rounded-md bg-gray-800 border border-gray-400">
+  <div class="flex flex-col gap-4">
+    <h1 class="text-xl text-white">Add School</h1>
+    <div>
+      <input bind:value={addSchool} type="text" class={(errorMessage.length ? "border-red-500" : "dark:border-gray-600") + " dark:placeholder-gray-400 dark:text-white dark:bg-gray-700 border text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[28rem] p-3 dark:focus:ring-blue-500 dark:focus:border-blue-500"} placeholder="School Name">
+    </div>
+    <div class="flex flex-row gap-3">
+      <button class="text-white disabled:opacity-50 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-10 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+      disabled={!addSchool.trim().length}>
+        Create
+      </button>
+      <button class="text-white disabled:opacity-50 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-10 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"
+      on:click={() => {
+          const modal = document.getElementById('newschoolmodal');
+          if (modal instanceof HTMLDialogElement && typeof modal.close === 'function') {
+              modal.close();
+          }
+      }}>
+        Cancel
+      </button>
+    </div>
+  </div>
+</dialog>
 <!-- <div class="flex flex-col gap-5 items-center w-[60vw] mx-auto">
   <h1 class="text-center text-2xl font-bold pt-16">Welcome! We're so glad to have you!</h1>
 

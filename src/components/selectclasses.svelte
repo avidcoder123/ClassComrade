@@ -119,4 +119,4 @@
         <button class="btn btn-error">Cancel</button>
       </div>
     </form>
-  </dialog>
+</dialog>
