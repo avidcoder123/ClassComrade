@@ -10,6 +10,7 @@
     $: disabled = email === '' || password === '';
   
   function login() {
+    disabled = true
     const promise = appwriteUser.createEmailSession(email, password);
     promise.then((response) => {
       console.log(response);
@@ -33,6 +34,7 @@
     }, (error) => {
       console.log(error);
       errorMessage = error.message;
+      disabled = email === '' || password === '';
     });
   }
   
