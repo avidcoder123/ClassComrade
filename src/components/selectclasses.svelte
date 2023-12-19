@@ -101,15 +101,15 @@
         Back to dashboard
     </button>
 </div>
-<dialog id="newclassmodal" class="modal">
-    <form method="dialog" class="modal-box bg-gray-200 flex flex-col gap-4">
-      <h3 class="font-bold text-2xl text-gray-900 text-center">Create Class</h3>
-      <label for="name" class="text-gray-800">Class Name</label>
-      <input type="text" id="name" class="input input-bordered bg-gray-400" placeholder="Class Name" bind:value={className} />
-      <label for="name" class="text-gray-800">Professor/Teacher Name</label>
-      <input type="text" id="name" class="input input-bordered bg-gray-400" placeholder="Professor/Teacher Name" bind:value={teacherName} />
-      <label for="database" class="text-gray-800">Class Acceleration</label>
-      <select id="database" class="select select-bordered bg-gray-400" bind:value={acceleration}>
+<dialog id="newclassmodal" class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center md:inset-0 bg-white rounded-lg shadow dark:bg-gray-700">
+    <form method="dialog" class="modal-box flex flex-col gap-4">
+      <h3 class="font-bold text-2xl text-white text-center">Create Class</h3>
+      <label for="name" class="text-white">Class Name</label>
+      <input type="text" id="name" class="input input-bordered" placeholder="Class Name" bind:value={className} />
+      <label for="name" class="text-white">Professor/Teacher Name</label>
+      <input type="text" id="name" class="input input-bordered" placeholder="Professor/Teacher Name" bind:value={teacherName} />
+      <label for="database" class="text-white">Class Acceleration</label>
+      <select id="database" class="select select-bordered" bind:value={acceleration}>
           <option value="">Select...</option>
           <option value="On Level">On Level</option>
           <option value="Honors">Honors</option>

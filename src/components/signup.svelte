@@ -175,35 +175,3 @@
     </div>
   </div>
 </dialog>
-<!-- <div class="flex flex-col gap-5 items-center w-[60vw] mx-auto">
-  <h1 class="text-center text-2xl font-bold pt-16">Welcome! We're so glad to have you!</h1>
-
-  <div class="flex justify-center">
-    <div class="w-96 h-auto p-12 mt-12 rounded-md self-center flex flex-col gap-5">
-    <input type="text" bind:value={userName} placeholder="Username" />
-    <input type="email" bind:value={email} on:change={updateSchools} placeholder="School Email" />
-    <input type="password" bind:value={password} placeholder="Password" />
-    <input type="password" bind:value={confirmPassword} placeholder="Confirm Password" />
-    <select class="select select-bordered bg-gray-400" bind:value={school} on:change={checkForNew} disabled={!(email.split("@")[0] && emailDomain)}>
-      <option value="">Select school...</option>
-      {#if schools.length}
-        {#each schools as school}
-          <option value={school.$id}>{school.Name}</option>
-        {/each}
-      {/if}
-      <option value="newschool">Add new school</option>
-    </select>
-    <button on:click={SignUp} class=" bg-gray-600 disabled:hover:bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded h-10 disabled:opacity-50" disabled={disabled}>Sign Up</button>
-    <p class="text-center text-red-500">{errorMessage}</p>
-    <a href="/login" class="text-center text-gray-500 hover:text-gray-700">Already have an account? Login</a>
-    </div>
-  </div>
-</div>
-  <style>
-    input {
-      border: 1px solid #ababab;
-      padding: 0.5rem;
-      border-radius: 5px;
-      background-color: #7676762b;
-    }
-  </style> -->
