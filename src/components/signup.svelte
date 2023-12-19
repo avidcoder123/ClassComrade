@@ -34,30 +34,30 @@
     }
     school = ''
     appwriteDatabases.listDocuments(DB_ID, COLLECTION.Schools, [
-      Query.equal("Domain", emailDomain)
+      Query.equal("Domain", domain)
     ]).then(res => {schools = res.documents})
     
   }
 
-  function checkForNew() {
+  function createSchool() {
     let domain = emailDomain.toLowerCase().trim()
-    if(school == "newschool") {
-        const modal = document.getElementById('newschoolmodal');
-        if (modal instanceof HTMLDialogElement && typeof modal.showModal === 'function') {
-            modal.showModal();
-        }
-    }
-    return;
-    school = ""
-    //Ask for new school name
-    const newSchoolName = prompt("Enter the name of the new school:")
     appwriteDatabases.createDocument(DB_ID, COLLECTION.Schools, ID.unique(), {
-      "Name": newSchoolName,
+      "Name": addSchool,
       "Domain": domain
     }).then(res => {
       updateSchools()
       school = res.$id
     })
+  }
+
+  function checkForNew() {
+    if(school == "newschool") {
+      school=""
+        const modal = document.getElementById('newschoolmodal');
+        if (modal instanceof HTMLDialogElement && typeof modal.showModal === 'function') {
+            modal.showModal();
+        }
+    }
   }
 
   function SignUp() {
@@ -145,7 +145,7 @@
   <button on:click={SignUp} disabled={disabled} class="text-white disabled:opacity-50 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-10 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Sign Up</button>
   <p class="text-center text-gray-300">Already have an account? <a href="/login" class="text-blue-500">Sign Up</a></p>
 </div>
-<dialog id="newschoolmodal" class="rounded-md bg-gray-800 border border-gray-400">
+<dialog id="newschoolmodal" class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center md:inset-0 bg-white rounded-lg shadow dark:bg-gray-700">
   <div class="flex flex-col gap-4">
     <h1 class="text-xl text-white">Add School</h1>
     <div>
@@ -153,7 +153,14 @@
     </div>
     <div class="flex flex-row gap-3">
       <button class="text-white disabled:opacity-50 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-10 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-      disabled={!addSchool.trim().length}>
+      disabled={!addSchool.trim().length}
+      on:click={() => {
+        createSchool()
+        const modal = document.getElementById('newschoolmodal');
+        if (modal instanceof HTMLDialogElement && typeof modal.close === 'function') {
+            modal.close();
+        }
+    }}>
         Create
       </button>
       <button class="text-white disabled:opacity-50 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-10 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800"
