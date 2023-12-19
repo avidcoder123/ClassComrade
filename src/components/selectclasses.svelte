@@ -53,7 +53,7 @@
                 Name: name 
             } as unknown as Models.Document)]
             selectedClasses = [...selectedClasses, d.$id]
-
+            updateClasses()
         })
     }
 
@@ -103,29 +103,43 @@
 </div>
 <dialog id="newclassmodal" class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center md:inset-0 bg-white rounded-lg shadow dark:bg-gray-700">
     <form method="dialog" class="modal-box flex flex-col gap-4">
-      <h3 class="font-bold text-2xl text-white text-center">Create Class</h3>
-      <label for="name" class="text-white">Class Name</label>
-      <input type="text" id="name" class="input input-bordered" placeholder="Class Name" bind:value={className} />
-      <label for="name" class="text-white">Professor/Teacher Name</label>
-      <input type="text" id="name" class="input input-bordered" placeholder="Professor/Teacher Name" bind:value={teacherName} />
-      <label for="database" class="text-white">Class Acceleration</label>
-      <select id="database" class="select select-bordered" bind:value={acceleration}>
-          <option value="">Select...</option>
-          <option value="On Level">On Level</option>
-          <option value="Honors">Honors</option>
-          <option value="Dual Credit">Dual Credit</option>
-          <option value="AP">AP</option>
-          <option value="IB-HL">IB-HL</option>
-      </select>
-      <button class="btn btn-primary" disabled={!teacherName || !acceleration || !className} on:click={() => {
+        <div class="flex flex-row">
+            <h3 class="font-bold text-2xl text-white text-center">Create Class</h3>
+            <button type="button" class="ml-auto text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+            on:click={() => {
+                const modal = document.getElementById('newclassmodal');
+                if (modal instanceof HTMLDialogElement && typeof modal.close === 'function') {
+                    modal.close();
+                }
+            }}>
+              <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+              </svg>
+            </button>
+        </div>
+      <div class="flex flex-col gap-4 border-t border-t-gray-600 pt-3">
+        <label for="database" class="text-white">Class Acceleration</label>
+        <select id="database" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" bind:value={acceleration}>
+            <option value="">Select...</option>
+            <option value="On Level">On Level</option>
+            <option value="Honors">Honors</option>
+            <option value="Dual Credit">Dual Credit</option>
+            <option value="AP">AP</option>
+            <option value="IB-HL">IB-HL</option>
+        </select>
+        <label for="name" class="text-white">Class Name (No prefixes)</label>
+        <input type="text" bind:value={className} class="dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:bg-gray-700 border text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[28rem] p-3 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Calculus AB, not AP Calculus AB">
+        <label for="name" class="text-white">Professor/Teacher Name</label>
+        <input type="text" bind:value={teacherName} class="dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:bg-gray-700 border text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[28rem] p-3 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Instructor Name">
+      </div>
+      <button
+        class="text-white rounded-full bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium text-sm px-6 py-3 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+        disabled={!teacherName || !acceleration || !className} on:click={() => {
           createClass()
           const modal = document.getElementById('newclassmodal');
           if (modal instanceof HTMLDialogElement && typeof modal.close === 'function') {
               modal.close();
           }
       }}>Create</button>
-      <div class="modal-action">
-        <button class="btn btn-error">Cancel</button>
-      </div>
     </form>
 </dialog>
