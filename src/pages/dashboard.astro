@@ -16,19 +16,17 @@ let classes = await appwriteDatabases.listDocuments(DB_ID, COLLECTION.Class_User
 ---
 {!classes.length && <script>location.href="/selectclasses"</script>}
 <Layout title="Dashboard" login={true}>
-    <div class="flex flex-col items-center justify-center h-56 sm:pt-10 2xl:scale-125 pt-12 mb-5">
-        <p class="text-4xl text-center h-44 font-bold pt-16">Welcome, {username}!</p>
-        <button onclick="location.href = '/selectclasses'" style="cursor: pointer;" class="bg-gray-400 rounded-md w-48 h-28">
+    <div class="flex flex-col items-center mb-5 min-h-screen gap-7">
+        <p class="text-5xl text-center font-bold pt-16 text-white">Welcome, {username}!</p>
+        <button onclick="location.href = '/selectclasses'" style="cursor: pointer;" class="px-5 py-3 text-base font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
             Select Classes
         </button>
-    </div>
-    <div class="flex flex-row flex-wrap gap-10 items-center justify-center mt-10">
-        {classes?.map(c => (
-            <div onclick={`window.location = "/class/${c.$id}"`} style="cursor: pointer;" class="card w-96 h-20 2xl:h-36 2xl:w-[32rem] sm:h-32 bg-gray-500">
-                <div class="card-body items-center justify-center">
-                    <h1 class="card-title text-center 2xl:text-2xl text-white">{c.Name}</h1>
-                </div>
-            </div>
-        ))}
+        <div class="grid grid-cols-3 gap-10 items-center justify-center max-w-5xl">
+            {classes?.map(c => (
+                <a href={"/class/" + c.$id} class="items-center justify-center block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{c.Name}</h5>
+                </a>
+            ))}
+        </div>
     </div>
 </Layout>

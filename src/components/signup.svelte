@@ -65,6 +65,8 @@
       errorMessage = "Passwords do not match."
       return
     }
+
+    disabled = true
     const promise = appwriteUser.create( ID.unique() , email, password, userName);
   
     promise.then((response) => {
@@ -81,6 +83,7 @@
           .then(x => {
             if(x.length > 0) {
               errorMessage = error.message;
+              disabled = !email || !password || !userName || !confirmPassword
             } else {
               appwriteDatabases.createDocument(DB_ID, COLLECTION.User_School, ID.unique(), {
                 User: res.userId,
@@ -91,6 +94,7 @@
         })
       } else {
         errorMessage = error.message;
+        disabled = !email || !password || !userName || !confirmPassword
       }
     });
   }
@@ -151,7 +155,7 @@ const closeModal = () => {
     </select>
   </div>
   <button on:click={SignUp} disabled={disabled} class="text-white disabled:opacity-50 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-10 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Sign Up</button>
-  <p class="text-center text-gray-300">Already have an account? <a href="/login" class="text-blue-500">Sign Up</a></p>
+  <p class="text-center text-gray-300">Already have an account? <a href="/login" class="text-blue-500">Log In</a></p>
 </div>
 <dialog id="newschoolmodal" class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center md:inset-0 bg-white rounded-lg shadow dark:bg-gray-700">
   <div class="flex flex-col gap-4">
