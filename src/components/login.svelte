@@ -53,7 +53,7 @@
             <path d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z"/>
         </svg>
       </div>
-      <input bind:value={email} type="text" class={(errorMessage.length ? "border-red-500" : "dark:border-gray-600") + " dark:placeholder-gray-400 dark:text-white dark:bg-gray-700 border text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[28rem] ps-10 p-3 dark:focus:ring-blue-500 dark:focus:border-blue-500"} placeholder="name@flowbite.com">
+      <input bind:value={email} type="text" class={(errorMessage.length ? "border-red-500" : "dark:border-gray-600") + " dark:placeholder-gray-400 dark:text-white dark:bg-gray-700 border text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[28rem] ps-10 p-3 dark:focus:ring-blue-500 dark:focus:border-blue-500"} placeholder="name@district.org">
     </div>
     <label for="default-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
     <input bind:value={password} type="password" class={(errorMessage.length ? "border-red-500" : "dark:border-gray-600") + " dark:placeholder-gray-400 dark:text-white dark:bg-gray-700 border text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[28rem] p-3 dark:focus:ring-blue-500 dark:focus:border-blue-500"} placeholder="Password">

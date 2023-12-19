@@ -77,8 +77,8 @@
         })
     }
 </script>
-<div class="flex flex-col items-center 2xl:scale-125 pt-10 gap-4 h-screen">
-    <p class="text-3xl text-center font-bold text-white">Select your classes</p>
+<div class="flex flex-col items-center gap-4 h-screen">
+    <p class="text-4xl text-center font-bold text-white">Select your classes</p>
     <button class="text-white rounded-full bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium text-sm px-6 py-3 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" 
     on:click={() => {
         const modal = document.getElementById('newclassmodal');
