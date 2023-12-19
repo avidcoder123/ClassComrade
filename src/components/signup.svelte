@@ -94,7 +94,15 @@
       }
     });
   }
+
+const closeModal = () => {
+  const modal = document.getElementById('newschoolmodal');
+  if (modal instanceof HTMLDialogElement && typeof modal.close === 'function') {
+      modal.close();
+  }
+}
 </script>
+<!-- svelte-ignore a11y-click-events-have-key-events -->
 <div class="flex flex-col gap-5 items-center h-screen">
   <h1 class="text-white text-4xl text-center font-semibold">
     Sign Up
@@ -150,12 +158,7 @@
     <div class="flex flex-row">
       <h1 class="text-xl text-white">Add School</h1>
       <button type="button" class="ml-auto text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-        on:click={() => {
-            const modal = document.getElementById('newschoolmodal');
-            if (modal instanceof HTMLDialogElement && typeof modal.close === 'function') {
-                modal.close();
-            }
-        }}>
+        on:click={closeModal}>
         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
         </svg>
@@ -169,11 +172,8 @@
       disabled={!addSchool.trim().length}
       on:click={() => {
         createSchool()
-        const modal = document.getElementById('newschoolmodal');
-        if (modal instanceof HTMLDialogElement && typeof modal.close === 'function') {
-            modal.close();
-        }
-    }}>
+        closeModal()
+      }}>
         Create
       </button>
     </div>
