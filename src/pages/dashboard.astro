@@ -21,7 +21,7 @@ let classes = await appwriteDatabases.listDocuments(DB_ID, COLLECTION.Class_User
         <button onclick="location.href = '/selectclasses'" style="cursor: pointer;" class="px-5 py-3 text-base font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
             Select Classes
         </button>
-        <div class="grid grid-cols-3 gap-10 items-center justify-center max-w-5xl">
+        <div class={(classes.length == 2 ? "grid-cols-2" : (classes.length >= 3 && "grid-cols-3")) + " grid gap-10 items-center justify-center max-w-5xl"}>
             {classes?.map(c => (
                 <a href={"/class/" + c.$id} class="items-center justify-center block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{c.Name}</h5>
