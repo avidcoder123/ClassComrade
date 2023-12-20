@@ -30,14 +30,12 @@ let Units = await appwriteDatabases.listDocuments(
                 <h2 class="text-2xl font-semibold text-center text-white">{Class.Name}</h2>
                 <Createunit id={classId} client:only />
                 <div class="flex flex-col gap-3 items-center p-12">
-                    {(Units.length > 0) && <h1 class="text-xl font-semibold text-white">Units</h1>}
+                    {(Units.length > 0) && <h1 class="text-2xl font-semibold text-white">Units</h1>}
                     {(Units.length > 0)
                         && Units.map((unit) => (
-                        <div onclick={`window.location = "/class/${classId}/services/draftonn/${unit.$id}"`} style="cursor: pointer;" class="card w-[26rem] sm:w-7/12 h-24 sm:h-20 bg-slate-400">
-                            <div class="text-xl items-center justify-center">
-                                <h1 class="text-xl pt-[5%] sm:pt-5 text-center">{unit.Name}</h1>
-                            </div>
-                        </div>
+                        <a href={`/class/${classId}/services/draftonn/${unit.$id}`} class=" w-96 items-center justify-center block py-3  bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                            <h5 class="mx-auto text-center text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{unit.Name}</h5>
+                        </a>
                         ))
                     }
                 </div>
