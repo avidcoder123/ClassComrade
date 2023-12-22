@@ -36,12 +36,11 @@
     }
 
     const closeModal = () => {
-    const modal = document.getElementById('newunitmodal');
-    if (modal instanceof HTMLDialogElement && typeof modal.close === 'function') {
-        modal.close();
+      const modal = document.getElementById('newunitmodal');
+      if (modal instanceof HTMLDialogElement && typeof modal.close === 'function') {
+          modal.close();
+      }
     }
-
-}
 </script>
 <button class="px-5 py-3 text-base font-medium text-center text-white bg-blue-700 rounded-full hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
 on:click={create}>
