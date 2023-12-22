@@ -229,7 +229,7 @@ const closeModal = () => {
 <main>
     <div class="min-h-screen">
         {#if canRead}
-            {#if docVisibility==null}
+            {#if docVisibility==null}=
                 <div class=" flex flex-col justify-center items-center pt-[40vh] gap-20">
                 <p class="text-center text-6xl text-slate-950 mx-auto w-[75vw]">🌐</p>
                 <span class="loading loading-infinity loading-lg text-black mx-auto"></span>
@@ -317,21 +317,36 @@ const closeModal = () => {
     }
 
     .tc-toolbox__toggler>svg>rect {
-        fill: #000000;
+        fill: #111827;
+    }
+
+    .tc-toolbox__toggler>svg>rect:hover {
+        fill: #1F2937;
+    }
+
+    .tc-toolbox__toggler>svg>circle {
+        fill: #FFFFFF;
     }
 
     .ce-popover-item:hover {
         background-color: #374151 !important;
     }
-    .ce-block--selected>div>div {
+    .ce-block--selected>div>div, .tc-cell--selected, .tc-cell--selected:hover, .tc-add-row:hover, .tc-add-column:hover {
+        background-color: #374151 !important;
+    }
+    .cdx-warning::before {
+        background-color: #FFFFFF;
+        border-radius: 5px;
+    }
+    .tc-add-row:hover::before {
         background-color: #374151 !important;
     }
 
-    .ce-popover {
+    .ce-popover, .tc-popover {
         background-color: #1F2937 !important;
     }
 
-    .ce-toolbar__plus:hover, .ce-toolbar__settings-btn:hover,.tc-toolbox__toggler:hover {
+    .ce-toolbar__plus:hover, .ce-toolbar__settings-btn:hover {
         background-color: #1F2937 !important;
     }
 
