@@ -66,10 +66,10 @@
     }
 </script>
 <div class=" w-screen h-screen">
-<h1 class="text-center text-5xl pt-16">Make a New Assignment</h1>
+<h1 class="text-center text-5xl pt-16 text-white">Make a New Assignment</h1>
 <div class="flex flex-col gap-y-5 items-center mt-10">
-    <input type="text" bind:value={assignmentname} placeholder="Assignment Name" class="input input-bordered input-primary w-full max-w-lg" />
-    <h1 class="text-4xl my-5">Questions</h1>
+    <input type="text" bind:value={assignmentname} placeholder="Assignment Name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 w-full max-w-lg" />
+    <h1 class="text-4xl my-5 text-white">Questions</h1>
     <div class="flex flex-col gap-y-10">
         {#each questions as question, idx}
             <div class="flex flex-row gap-x-3 w-full items-center justify-center" on:mouseenter={() => hover = idx} on:mouseleave={() => hover = -1}>
@@ -111,19 +111,15 @@
             </div>
         {/each}
     </div>
-
-    <div class="dropdown dropdown-hover">
-        <!-- svelte-ignore a11y-label-has-associated-control -->
-        <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-        <label tabindex="0"  class="btn btn-primary mt-5">+ New Question</label>
-        <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-        <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 z-50">
-          <!-- svelte-ignore a11y-missing-attribute -->
-          <!-- svelte-ignore a11y-click-events-have-key-events -->
-          <li><a on:click={addFree}>Multiple Choice/Free Response</a></li>
-          <!-- svelte-ignore a11y-missing-attribute -->
-          <!-- svelte-ignore a11y-click-events-have-key-events -->
-          <li><a on:click={addFile}>File Upload</a></li>
+    <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" tabindex="0" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">+ New Question</button>
+    <div id="dropdown" class="z-10 hiddfd0IPK:/n bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+          <li>
+            <a on:click={addFree} class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Multiple Choice/Free Response</a>
+          </li>
+          <li>
+            <a on:click={addFile} class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">File Upload</a>
+          </li>
         </ul>
     </div>
     <button on:click={submit} class="btn btn-info" class:btn-disabled={disabled}>Create Assignment</button>
