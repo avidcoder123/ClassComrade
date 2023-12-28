@@ -13,43 +13,60 @@
   let errorMessage = '';
   let school = '';
 
-  $: disabled = !email || !password || !userName || !confirmPassword;
+  let addSchool = '';
+
+  $: disabled = !email || !password || !userName || !confirmPassword || !school;
 
   $: emailDomain = email.split("@")[1]
 
   let schools: Models.Document[] = []
 
   function updateSchools() {
+    let domain = emailDomain.toLowerCase().trim()
+    console.log(domain)
+    if(
+      domain == "gmail.com" ||
+      domain == "protonmail.com" ||
+      domain == "yahoo.com" ||
+      domain == "hotmail.com") {
+        errorMessage = "You must use your school email!"
+        email = ""
+    }
     school = ''
     appwriteDatabases.listDocuments(DB_ID, COLLECTION.Schools, [
-      Query.equal("Domain", emailDomain)
+      Query.equal("Domain", domain)
     ]).then(res => {schools = res.documents})
     
   }
 
-  function checkForNew() {
-    if(school !== "newschool") return;
-    school = ""
-    //Ask for new school name
-    const newSchoolName = prompt("Enter the name of the new school:")
+  function createSchool() {
+    let domain = emailDomain.toLowerCase().trim()
     appwriteDatabases.createDocument(DB_ID, COLLECTION.Schools, ID.unique(), {
-      "Name": newSchoolName,
-      "Domain": emailDomain
+      "Name": addSchool,
+      "Domain": domain
     }).then(res => {
       updateSchools()
       school = res.$id
     })
   }
 
-  function SignUp() {
-    if(emailDomain == "gmail.com" || emailDomain == "outlook.com" || emailDomain == "hotmail.com") {
-      errorMessage = "You must use your school email, not a personal one."
-      return
+  function checkForNew() {
+    if(school == "newschool") {
+      school=""
+        const modal = document.getElementById('newschoolmodal');
+        if (modal instanceof HTMLDialogElement && typeof modal.showModal === 'function') {
+            modal.showModal();
+        }
     }
+  }
+
+  function SignUp() {
     if(confirmPassword !== password) {
       errorMessage = "Passwords do not match."
       return
     }
+
+    disabled = true
     const promise = appwriteUser.create( ID.unique() , email, password, userName);
   
     promise.then((response) => {
@@ -66,6 +83,7 @@
           .then(x => {
             if(x.length > 0) {
               errorMessage = error.message;
+              disabled = !email || !password || !userName || !confirmPassword
             } else {
               appwriteDatabases.createDocument(DB_ID, COLLECTION.User_School, ID.unique(), {
                 User: res.userId,
@@ -76,20 +94,57 @@
         })
       } else {
         errorMessage = error.message;
+        disabled = !email || !password || !userName || !confirmPassword
       }
     });
   }
-  </script>
-<div class="flex flex-col gap-5 items-center w-[60vw] mx-auto">
-  <h1 class="text-center text-2xl font-bold pt-16">Welcome! We're so glad to have you!</h1>
 
-  <div class="flex justify-center">
-    <div class="w-96 h-auto p-12 mt-12 rounded-md self-center flex flex-col gap-5">
-    <input type="text" bind:value={userName} placeholder="Username" />
-    <input type="email" bind:value={email} on:change={updateSchools} placeholder="School Email" />
-    <input type="password" bind:value={password} placeholder="Password" />
-    <input type="password" bind:value={confirmPassword} placeholder="Confirm Password" />
-    <select class="select select-bordered bg-gray-400" bind:value={school} on:change={checkForNew} disabled={!(email.split("@")[0] && emailDomain)}>
+const closeModal = () => {
+  const modal = document.getElementById('newschoolmodal');
+  if (modal instanceof HTMLDialogElement && typeof modal.close === 'function') {
+      modal.close();
+  }
+}
+</script>
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<div class="flex flex-col gap-5 items-center h-screen">
+  <h1 class="text-white text-4xl text-center font-semibold">
+    Sign Up
+  </h1>
+  <div class="flex flex-col gap-6">
+    <p class="text-red-500 mb-2">{errorMessage}</p>
+    <div>
+      <label for="large-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
+      <div class="relative">
+        <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+          <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z"/>
+          </svg>
+        </div>
+        <input bind:value={userName} type="text" class={(errorMessage.length ? "border-red-500" : "dark:border-gray-600") + " dark:placeholder-gray-400 dark:text-white dark:bg-gray-700 border text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[28rem] ps-10 p-3 dark:focus:ring-blue-500 dark:focus:border-blue-500"} placeholder="John Doe">
+      </div>
+    </div>
+    <div>
+      <label for="large-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">School Email</label>
+      <div class="relative">
+        <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+          <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 16">
+              <path d="m10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z"/>
+              <path d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z"/>
+          </svg>
+        </div>
+        <input bind:value={email} on:change={updateSchools} type="text" class={(errorMessage.length ? "border-red-500" : "dark:border-gray-600") + " dark:placeholder-gray-400 dark:text-white dark:bg-gray-700 border text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[28rem] ps-10 p-3 dark:focus:ring-blue-500 dark:focus:border-blue-500"} placeholder="name@district.org">
+      </div>
+    </div>
+    <div>
+      <label for="default-input" class="block text-sm font-medium text-gray-900 dark:text-white">Password</label>
+      <input bind:value={password} type="password" class={(errorMessage.length ? "border-red-500" : "dark:border-gray-600") + " dark:placeholder-gray-400 dark:text-white dark:bg-gray-700 border text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[28rem] p-3 dark:focus:ring-blue-500 dark:focus:border-blue-500"} placeholder="Password">
+    </div>
+    <div>
+      <label for="default-input" class="block text-sm font-medium text-gray-900 dark:text-white">Confirm Password</label>
+      <input bind:value={confirmPassword} type="password" class={(errorMessage.length ? "border-red-500" : "dark:border-gray-600") + " dark:placeholder-gray-400 dark:text-white dark:bg-gray-700 border text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[28rem] p-3 dark:focus:ring-blue-500 dark:focus:border-blue-500"} placeholder="Confirm Password">
+    </div>
+    <select class="rounded-md dark:text-white dark:bg-gray-700 dark:border-gray-600 p-3" bind:value={school} on:change={checkForNew} disabled={!(email.split("@")[0] && emailDomain)}>
       <option value="">Select school...</option>
       {#if schools.length}
         {#each schools as school}
@@ -98,17 +153,33 @@
       {/if}
       <option value="newschool">Add new school</option>
     </select>
-    <button on:click={SignUp} class=" bg-gray-600 disabled:hover:bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded h-10 disabled:opacity-50" disabled={disabled}>Sign Up</button>
-    <p class="text-center text-red-500">{errorMessage}</p>
-    <a href="/login" class="text-center text-gray-500 hover:text-gray-700">Already have an account? Login</a>
+  </div>
+  <button on:click={SignUp} disabled={disabled} class="text-white disabled:opacity-50 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-10 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Sign Up</button>
+  <p class="text-center text-gray-300">Already have an account? <a href="/login" class="text-blue-500">Log In</a></p>
+</div>
+<dialog id="newschoolmodal" class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center md:inset-0 bg-white rounded-lg shadow dark:bg-gray-700">
+  <div class="flex flex-col gap-4">
+    <div class="flex flex-row">
+      <h1 class="text-xl text-white">Add School</h1>
+      <button type="button" class="ml-auto text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+        on:click={closeModal}>
+        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+        </svg>
+      </button>
+    </div>
+    <div class="border-t border-t-gray-600 pt-3">
+      <input bind:value={addSchool} type="text" class={(errorMessage.length ? "border-red-500" : "dark:border-gray-600") + " dark:placeholder-gray-400 dark:text-white dark:bg-gray-700 border text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[28rem] p-3 dark:focus:ring-blue-500 dark:focus:border-blue-500"} placeholder="School Name">
+    </div>
+    <div class="flex flex-row gap-3">
+      <button class="text-white w-full disabled:opacity-50 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-10 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+      disabled={!addSchool.trim().length}
+      on:click={() => {
+        createSchool()
+        closeModal()
+      }}>
+        Create
+      </button>
     </div>
   </div>
-</div>
-  <style>
-    input {
-      border: 1px solid #ababab;
-      padding: 0.5rem;
-      border-radius: 5px;
-      background-color: #7676762b;
-    }
-  </style>
+</dialog>

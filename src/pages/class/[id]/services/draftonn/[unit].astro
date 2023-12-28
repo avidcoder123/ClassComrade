@@ -36,19 +36,18 @@ let lessons: Models.Document[][] = await appwriteDatabases.listDocuments(DB_ID, 
 <Layout title="Unit Page" login={true}>
     <div class="flex flex-col pt-5 min-h-screen w-[100%]">
         <div class="row">
-            <div class="col-12">
-                <h1 class="text-4xl font-semibold text-center">{unitName}</h1>
+            <div class="flex flex-col items-center gap-2">
+                <h1 class="text-4xl font-semibold text-center text-white">{unitName}</h1>
+                <Create AuthorName={username} AuthorUid={user} {unitID} client:only />
                 <div class="flex flex-col gap-5 items-center p-12">
-                    <Create AuthorName={username} AuthorUid={user} {unitID} client:only />
                     {lessons.map(lesson =>
                         <div class="w-full items-center flex flex-col gap-3">
-                            <h1 class="text-2xl">{lesson[0].Name}</h1>
+                            <h1 class="text-2xl text-white">{lesson[0].Name}</h1>
                             {lesson.map(note => 
-                            <div style="cursor: pointer;" class="card w-[26rem] sm:w-7/12 h-24 sm:h-20 bg-slate-400">
-                                <div onclick={`window.location = "/class/${classID}/services/draftonn/doc/${note.$id}"`} style="cursor: pointer;" class="text-xl items-center justify-center">
-                                    <h1 class="text-xl pt-[5%] sm:pt-5 text-center">{note.Description} by {note.AuthorName}</h1>
-                                </div>
-                            </div>)}
+                            <a href={`/class/${classID}/services/draftonn/doc/${note.$id}`} class=" w-96 items-center justify-center block py-3  bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                                <h5 class="mx-auto text-center text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{note.Description} by {note.AuthorName}</h5>
+                            </a>
+                            )}
                         </div>
                     )}
                 </div>

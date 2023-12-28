@@ -4,10 +4,10 @@
     import { COLLECTION, DB_ID } from "../../lib/ids";
 
     function create() {
-        location.href = "./helpinghand/newassignment"
+        location.href += "/newassignment"
     }
 </script>
-<button class="btn text-gray-800 bg-gray-200 items-center mx-auto hover:bg-gray-300"
+<button class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
 on:click={create}>
     New Assignment
 </button>

@@ -19,23 +19,26 @@ if(user == assignment.User) {
 let questions = JSON.parse(assignment.Questions)
 ---
 <Layout login={true} title="View Assignment">
-    <h1 class="text-4xl 2xl:text-5xl text-center my-10 pt-12">{assignment.Name}</h1>
-    <div class="flex flex-row items-center justify-center">
-        {owner && <a href={"./delete/" + assignmentId} onclick="return confirm('Are you sure?')"><button class="btn btn-error">Delete Assignment</button></a>}
-    </div>
-    {questions.map((question: any, idx: number) => (
-        <div class="flex flex-col items-center">
-            <div class="flex flex-col items-center gap-y-5 my-5">
-                <h2 class="text-xl 2xl:text-3xl text-left w-[24rem] sm:w-[40rem]">{idx + 1}. {question.question}</h2>
-                {question.is_file ?
-                    (<a class="" href={`https://cloud.appwrite.io/v1/storage/buckets/64ada07bbca91d21cdbc/files/${question.answer}/view?project=648bc5020fbda818412e`} target="_blank">
-                        <div class="flex justify-center">
-                            <img class="hover:scale-125" width="40%" alt="Answers" src={`https://cloud.appwrite.io/v1/storage/buckets/64ada07bbca91d21cdbc/files/${question.answer}/view?project=648bc5020fbda818412e`}>
-                        </div>
-                    </a>) : (question.answer.startsWith('https://') || question.answer.startsWith('http://') ? <a href={question.answer} target="_blank" class="btn btn-success">Open Link</a> : <p class="text-grey-200 text-xl 2xl:text-3xl text-left w-[24rem] sm:w-[40rem] whitespace-pre-wrap"><span class="text-blue-600">Answer: </span>{question.answer}</p>)
-                }
-            </div>
+    <div class="min-h-screen">
+        <h1 class="text-4xl 2xl:text-5xl text-center my-10 pt-12 text-white">{assignment.Name}</h1>
+        <div class="flex flex-row items-center justify-center">
+            {owner && <a href={"./delete/" + assignmentId} onclick="return confirm('Are you sure?')"><button class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete Assignment</button></a>}
         </div>
-    ))}
+        {questions.map((question: any, idx: number) => (
+            <div class="flex flex-col items-center">
+                <div class="flex flex-col items-center gap-y-5 my-5">
+                    <h2 class="text-xl 2xl:text-3xl text-left w-[24rem] sm:w-[40rem] text-white">{idx + 1}. {question.question}</h2>
+                    {question.is_file ?
+                        (<a class="" href={`https://cloud.appwrite.io/v1/storage/buckets/64ada07bbca91d21cdbc/files/${question.answer}/view?project=648bc5020fbda818412e`} target="_blank">
+                            <div class="flex justify-center">
+                                <img class="hover:scale-125" width="40%" alt="Answers" src={`https://cloud.appwrite.io/v1/storage/buckets/64ada07bbca91d21cdbc/files/${question.answer}/view?project=648bc5020fbda818412e`}>
+                            </div>
+                        </a>) : (question.answer.startsWith('https://') || question.answer.startsWith('http://') ? <a href={question.answer} target="_blank" class="btn btn-success">Open Link</a> : <p class="text-white text-xl 2xl:text-3xl text-left w-[24rem] sm:w-[40rem] whitespace-pre-wrap"><span class="text-blue-500">Answer: </span>{question.answer}</p>)
+                    }
+                </div>
+            </div>
+            <hr>
+        ))}
+    </div>
     <Comments assignmentId={assignmentId} client:only="Svelte" />
 </Layout>
