@@ -302,8 +302,12 @@ const closeModal = () => {
     </div>
 
 <style>
-    .cdx-block, .ce-header, .ce-toolbar__plus, .ce-toolbar__settings-btn, .ce-popover-item__title {
+    .cdx-block, .ce-header, .ce-toolbar__plus, .ce-toolbar__settings-btn, .ce-popover-item__title, .ce-conversion-toolbar div {
         color: #ffffff;
+    }
+
+    ::selection {
+        background-color: #3297FD !important;
     }
 
     .cdx-search-field, .ce-popover__search, .cdx-settings-button  {
@@ -331,7 +335,7 @@ const closeModal = () => {
     .ce-popover-item:hover {
         background-color: #374151 !important;
     }
-    .ce-block--selected>div>div, .tc-cell--selected, .tc-cell--selected:hover, .tc-add-row:hover, .tc-add-column:hover {
+    .ce-block--selected>div>div, .tc-cell--selected, .tc-cell--selected:hover, .tc-add-row:hover, .tc-add-column:hover, .ce-conversion-toolbar div.ce-conversion-tool:hover {
         background-color: #374151 !important;
     }
     .cdx-warning::before {
@@ -342,12 +346,24 @@ const closeModal = () => {
         background-color: #374151 !important;
     }
 
-    .ce-popover, .tc-popover {
+    .ce-popover, .tc-popover, .ce-inline-toolbar__toggler-and-button-wrapper, .ce-conversion-toolbar  {
         background-color: #1F2937 !important;
+    }
+
+    .ce-inline-toolbar__toggler-and-button-wrapper svg, .ce-inline-toolbar__toggler-and-button-wrapper path {
+        stroke: #FFFFFF !important;
+    }
+
+    [data-tool=changeCase] svg, .ce-inline-toolbar__dropdown-content svg {
+        fill: #FFFFFF !important;
     }
 
     .ce-toolbar__plus:hover, .ce-toolbar__settings-btn:hover {
         background-color: #1F2937 !important;
+    }
+
+    .ce-inline-toolbar__toggler-and-button-wrapper button:hover, .ce-inline-toolbar__dropdown:hover {
+        background-color: #374151 !important;
     }
 
     h1 {
