@@ -77,18 +77,18 @@ function chooseLesson() {
         </button>
       </div>
       <div class="flex flex-col gap-4 border-t border-t-gray-600 pt-3">
-        <label for="name" class="text-white">Lesson Name</label>
+        <label for="name" class="text-white">Lesson Name (Select from the dropdown if it's there!)</label>
       </div>
-      <!--TODO: New lesson-->
-      <select bind:value={lessonName} on:change={chooseLesson}
-      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-        <option value="">Select Lesson...</option>
-        <option value="newlesson">Create New Lesson</option>
+      <input
+      class="dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:bg-gray-700 border text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[28rem] p-3 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      bind:value={lessonName} on:change={chooseLesson} list="lessons" />
+      <datalist
+      id="lessons">
         {#each lessons as lesson}
           <option value={lesson}>{lesson}</option>
         {/each}
-      </select>
-      <label for="description" class="text-white">Notes Title</label>
+      </datalist>
+      <label for="description" class="text-white">Note Extra Description</label>
       <input id="description" bind:value={DocumentDesc} class="dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:bg-gray-700 border text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[28rem] p-3 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Description" />
       <button class="text-white rounded-full bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium text-sm px-6 py-3 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
       disabled={!(lessonName && DocumentDesc)} on:click={() => {
