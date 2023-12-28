@@ -15,7 +15,7 @@
 
   let addSchool = '';
 
-  $: disabled = !email || !password || !userName || !confirmPassword;
+  $: disabled = !email || !password || !userName || !confirmPassword || !school;
 
   $: emailDomain = email.split("@")[1]
 
