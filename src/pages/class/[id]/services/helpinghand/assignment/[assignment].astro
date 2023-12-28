@@ -39,6 +39,6 @@ let questions = JSON.parse(assignment.Questions)
             </div>
             <hr>
         ))}
+        <Comments assignmentId={assignmentId} client:only="Svelte" />
     </div>
-    <Comments assignmentId={assignmentId} client:only="Svelte" />
 </Layout>

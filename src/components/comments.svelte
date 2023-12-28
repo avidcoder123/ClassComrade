@@ -30,18 +30,18 @@
 </script>
 
 <main>
-    <div class="flex flex-col justify-center items-center">
-    <h1 class="text-3xl font-bold">Comments</h1>
+    <div class="flex flex-col items-center">
+    <h1 class="text-3xl font-bold text-white my-2">Comments</h1>
     <div class="flex flex-col justify-center items-center w-96">
-    <div class="flex-row gap-6 pb-4">
-        <input class="input input-bordered input-info w-72 mt-2" bind:value={writtenComment} placeholder="Add a comment" type="text">
-        <button class="btn btn-success disabled:btn-error"on:click={addComment} {disabled}>Add</button>
+    <div class="flex flex-row gap-6 mb-4">
+        <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  bind:value={writtenComment} placeholder="Add a comment" type="text">
+        <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" on:click={addComment} {disabled}>Add</button>
     </div>
     <!-- get comments -->
     {#each loadedComments as comment}
-        <div class="chat chat-start w-full">
-            <div class="chat-bubble chat-bubble-secondary">{comment}</div>     
-        </div>
+        <div class="flex flex-col w-full max-w-[320px] leading-1.5 px-4 py-2 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700">
+            <p class="text-sm font-normal py-2.5 text-gray-900 dark:text-white">{comment}</p>
+         </div>
     {/each}
     </div>
     </div>
