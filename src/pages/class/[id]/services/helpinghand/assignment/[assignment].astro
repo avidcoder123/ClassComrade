@@ -3,6 +3,7 @@ import Layout from "../../../../../../layouts/Layout.astro"
 
 import { appwriteDatabases } from "../../../../../../lib/backend";
 import { COLLECTION, DB_ID } from "../../../../../../lib/ids";
+import Comments from "../../../../../../components/comments.svelte";
 
 
 let assignmentId = Astro.params.assignment as string
@@ -39,4 +40,5 @@ let questions = JSON.parse(assignment.Questions)
             <hr>
         ))}
     </div>
+    <Comments assignmentId={assignmentId} client:only="Svelte" />
 </Layout>
