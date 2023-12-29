@@ -41,6 +41,13 @@ let docVisibility = null;
 let AuthorUid = "";
 
 let canRead = false;
+let isMobile = false;
+
+// check if the user is on a mobile device
+// if the screen width is less than 768px, then the user is on a mobile device
+if (window.innerWidth < 768) {
+    isMobile = true;
+}
 
 let editor;
 let ParsedHTML = []
@@ -63,6 +70,11 @@ Backend.appwriteDatabases.getDocument(databaseId, collectionId, pid).then((respo
             canRead = true;
         } else {
             canRead = false;
+        }
+        if (isMobile) {
+            canRead = false;
+        } else {
+            canRead = true;
         }
     } else {
         loadedData = editor.save();
