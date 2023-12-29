@@ -31,6 +31,7 @@ let Units = await appwriteDatabases.listDocuments(
                 <Createunit id={classId} client:only />
                 <div class="flex flex-col gap-3 items-center p-12">
                     {(Units.length > 0) && <h1 class="text-2xl font-semibold text-white">Units</h1>}
+                    <div class="flex flex-wrap gap-7">
                     {(Units.length > 0)
                         && Units.map((unit) => (
                         <a href={`/class/${classId}/services/draftonn/${unit.$id}`} class=" w-96 items-center justify-center block py-3  bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
@@ -38,6 +39,7 @@ let Units = await appwriteDatabases.listDocuments(
                         </a>
                         ))
                     }
+                    </div>
                 </div>
             </div>
         </div>

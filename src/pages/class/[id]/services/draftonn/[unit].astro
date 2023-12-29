@@ -43,11 +43,13 @@ let lessons: Models.Document[][] = await appwriteDatabases.listDocuments(DB_ID, 
                     {lessons.map(lesson =>
                         <div class="w-full items-center flex flex-col gap-3">
                             <h1 class="text-2xl text-white">{lesson[0].Name}</h1>
+                            <div class="flex flex-wrap gap-7">
                             {lesson.map(note => 
                             <a href={`/class/${classID}/services/draftonn/doc/${note.$id}`} class=" w-96 items-center justify-center block py-3  bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                                 <h5 class="mx-auto text-center text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{note.Description} by {note.AuthorName}</h5>
                             </a>
                             )}
+                            </div>
                         </div>
                     )}
                 </div>
