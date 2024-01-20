@@ -77,21 +77,8 @@
     }, (error) => {
       console.log(error);
       if(error.message == "A user with the same id, email, or phone already exists in this project.") {
-        appwriteUser.createEmailSession(email, password).then(res => {
-          appwriteDatabases.listDocuments(DB_ID, COLLECTION.User_School, [Query.equal("User", res.$id)])
-          .then(r => r.documents)
-          .then(x => {
-            if(x.length > 0) {
-              errorMessage = error.message;
-              disabled = !email || !password || !userName || !confirmPassword
-            } else {
-              appwriteDatabases.createDocument(DB_ID, COLLECTION.User_School, ID.unique(), {
-                User: res.userId,
-                School: school
-              }).then(() => window.location.href = '/login')
-            }
-          })
-        })
+        errorMessage = error.message + " If you already have an account with DraftOnn, please message Umar so he can migrate your account for you.";
+        disabled = !email || !password || !userName || !confirmPassword
       } else {
         errorMessage = error.message;
         disabled = !email || !password || !userName || !confirmPassword

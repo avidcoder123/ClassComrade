@@ -30,7 +30,8 @@
         for(let question of questions) {
             if(question.is_file) {
                 const file = question.files!.item(0)!
-                appwriteStorage.createFile('64ada07bbca91d21cdbc', question.answer, file)
+                console.log(question.answer)
+                await appwriteStorage.createFile('64ada07bbca91d21cdbc', question.answer, file)
             }
         } 
     }
