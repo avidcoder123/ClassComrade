@@ -16,7 +16,7 @@ let alist = await appwriteDatabases.listDocuments(DB_ID, COLLECTION.Assignment, 
     Query.orderDesc("$createdAt")
 ]).then(x => x.documents)
 
-let assignments = _.sortBy(_.groupBy(alist, x => new Date(x.created_at!).toDateString()), (x,y) => y)
+let assignments = _.sortBy(_.groupBy(alist, x => new Date(x.$createdAt!).toDateString()), (x,y) => y)
 ---
 
 <Layout title="HelpingHand" login={true}>
