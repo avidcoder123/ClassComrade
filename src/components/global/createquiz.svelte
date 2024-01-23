@@ -30,15 +30,15 @@ appwriteDatabases.listDocuments(DB_ID, COLLECTION.CCNote, [
   lessons=[...new Set(res.documents.map(x => x.Name))])
 
 
+
 function createDocument() {
-   appwriteDatabases.createDocument(DB_ID, COLLECTION.CCNote, ID.unique(), {
+   appwriteDatabases.createDocument(DB_ID, COLLECTION.Quizzes, ID.unique(), {
      AuthorName,
      AuthorUid,
      Name: lessonName,
      Description: DocumentDesc,
-     LastUpdated: new Date().toISOString(),
      Unit: unitID
-   }).then(res => location.href = `./doc/${res.$id}`)
+   }).then(res => location.href = `./createquiz/${res.$id}`)
 }
 
 function chooseLesson() {
@@ -55,23 +55,23 @@ function chooseLesson() {
 }
 </script>
 <div class="flex flex-wrap gap-2">
-  <button class="px-5 py-3 text-base font-medium text-center text-white bg-blue-700 rounded-full hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+  <button class="px-5 py-3 text-base font-medium text-center text-white bg-green-700 rounded-full hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
   on:click={() => {
-    const modal = document.getElementById('my_modal_1');
+    const modal = document.getElementById('my_modal_2');
     if (modal instanceof HTMLDialogElement && typeof modal.showModal === 'function') {
         modal.showModal();
     }
   }}>
-      New Note
+      New Quiz
   </button>
 
-  <dialog id="my_modal_1" class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center md:inset-0 bg-white rounded-lg shadow dark:bg-gray-700">
+  <dialog id="my_modal_2" class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center md:inset-0 bg-white rounded-lg shadow dark:bg-gray-700">
     <form method="dialog" class="flex flex-col gap-4">
       <div class="flex flex-row">
-        <h3 class="font-bold text-2xl text-white text-center">Create Note</h3>
+        <h3 class="font-bold text-2xl text-white text-center">Create Quiz</h3>
         <button type="button" class="ml-auto text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
         on:click={() => {
-            const modal = document.getElementById('my_modal_1');
+            const modal = document.getElementById('my_modal_2');
             if (modal instanceof HTMLDialogElement && typeof modal.close === 'function') {
                 modal.close();
             }
@@ -98,7 +98,7 @@ function chooseLesson() {
       <button class="text-white rounded-full bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium text-sm px-6 py-3 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
       disabled={!lessonName} on:click={() => {
           createDocument();
-          const modal = document.getElementById('my_modal_1');
+          const modal = document.getElementById('my_modal_2');
           if (modal instanceof HTMLDialogElement && typeof modal.close === 'function') {
               modal.close();
           }

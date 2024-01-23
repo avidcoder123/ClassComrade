@@ -10,5 +10,6 @@ export const COLLECTION = {
     Class_User: "656771844e22e5b07165",
     Units: "6568c90f49dc101362da",
     CCNote: "656e3d0f7cc87c926386",
-    Assignment: "6577754ad009e3c19c39"
+    Assignment: "6577754ad009e3c19c39",
+    Quizzes: "65afddb0d989c6980a61"
 }
