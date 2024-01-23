@@ -88,10 +88,10 @@ function chooseLesson() {
           <option value={lesson}>{lesson}</option>
         {/each}
       </datalist>
-      <label for="description" class="text-white">Note Extra Description</label>
+      <label for="description" class="text-white">Optional Description</label>
       <input id="description" bind:value={DocumentDesc} class="dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:bg-gray-700 border text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[28rem] p-3 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Description" />
       <button class="text-white rounded-full bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium text-sm px-6 py-3 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-      disabled={!(lessonName && DocumentDesc)} on:click={() => {
+      disabled={!lessonName} on:click={() => {
           createDocument();
           const modal = document.getElementById('my_modal_1');
           if (modal instanceof HTMLDialogElement && typeof modal.close === 'function') {
