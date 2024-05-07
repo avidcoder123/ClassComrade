@@ -33,7 +33,7 @@ let questions = JSON.parse(assignment.Questions)
                             <div class="flex justify-center">
                                 <img class="hover:scale-125" width="40%" alt="Answers" src={`https://cloud.appwrite.io/v1/storage/buckets/64ada07bbca91d21cdbc/files/${question.answer}/view?project=648bc5020fbda818412e`}>
                             </div>
-                        </a>) : (question.answer.startsWith('https://') || question.answer.startsWith('http://') ? <a href={question.answer} target="_blank" class="btn btn-success">Open Link</a> : <p class="text-white text-xl 2xl:text-3xl text-left w-[24rem] sm:w-[40rem] whitespace-pre-wrap"><span class="text-blue-500">Answer: </span>{question.answer}</p>)
+                        </a>) : (question.answer.startsWith('https://') || question.answer.startsWith('http://') ? <a href={question.answer} target="_blank" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Open Link</a> : <p class="text-white text-xl 2xl:text-3xl text-left w-[24rem] sm:w-[40rem] whitespace-pre-wrap"><span class="text-blue-500">Answer: </span>{question.answer}</p>)
                     }
                 </div>
             </div>
