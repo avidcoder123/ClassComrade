@@ -34,6 +34,9 @@
     }, (error) => {
       console.log(error);
       errorMessage = error.message;
+      appwriteUser.deleteSession('current').then(() => {
+        document.cookie = "";
+      })
       disabled = email === '' || password === '';
     });
   }
